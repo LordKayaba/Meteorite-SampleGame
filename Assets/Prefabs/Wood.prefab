@@ -224,7 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0.5
   canBurn: 1
-  Falls: []
+  falls: []
 --- !u!1001 &1979481232449042079
 PrefabInstance:
   m_ObjectHideFlags: 0

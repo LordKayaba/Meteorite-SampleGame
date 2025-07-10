@@ -6,7 +6,7 @@ public class Wood : MonoBehaviour, IAction
     [SerializeField] protected float time = 0.5f;
     [SerializeField] protected bool canBurn = true;
     [SerializeField]
-    protected GameObject[] Falls;
+    protected GameObject[] falls;
 
     protected GameObject particle;
     protected SpriteRenderer spriteRenderer;
@@ -45,32 +45,33 @@ public class Wood : MonoBehaviour, IAction
     public void Explode()
     {
         audioSource.Play();
-        fall();
+        Fall();
 
         if (collider2) collider2.enabled = false;
 
         spriteRenderer.enabled = false;
+        particle.transform.SetParent(null);
         particle.SetActive(true);
         StartCoroutine(DisableRoutine());
     }
 
     bool isFall = false;
-    public void fall()
+    public void Fall()
     {
-        if (!isFall && Falls.Length > 0)
+        if (isFall || falls.Length == 0) return;
+
+        foreach (var fall in falls)
         {
-            for (int i = 0; i < Falls.Length; i++)
-            {
-                if (Falls[i])
-                {
-                    if (Falls[i].GetComponent<Wood>())
-                    {
-                        Falls[i].GetComponent<Wood>().fall();
-                    }
-                    Falls[i].AddComponent<Fall>();
-                }
-            }
-            isFall = true;
+            if (!fall) continue;
+            fall.GetComponent<Wood>()?.Fall();
+            fall.AddComponent<Fall>();
         }
+
+        isFall = true;
+    }
+
+    void OnDisable()
+    {
+        particle?.SetActive(false);
     }
 }
