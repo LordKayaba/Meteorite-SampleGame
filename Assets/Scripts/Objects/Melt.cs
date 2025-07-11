@@ -25,7 +25,7 @@ public class Melt : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Contains("Meteorite"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             audioSource.Play();
             Meteorite meteorite = collision.gameObject.GetComponent<Meteorite>();
@@ -37,11 +37,9 @@ public class Melt : MonoBehaviour
 
     void SavePoint()
     {
-        /*if (GameData.data.level.melt != gameObject.name)
+        if (GameManager.Instance.savedPoint != gameObject)
         {
-            Vector3 vector = transform.position;
-            vector.y += 7;
-            GameData.data.level.SetPoint(gameObject, vector);
-        }*/
+            GameManager.Instance.SavePoint(gameObject);
+        }
     }
 }

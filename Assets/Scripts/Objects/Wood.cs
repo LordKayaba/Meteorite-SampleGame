@@ -44,7 +44,7 @@ public class Wood : MonoBehaviour, IAction
 
     public void Explode()
     {
-        audioSource.Play();
+        audioSource?.Play();
         Fall();
 
         if (collider2) collider2.enabled = false;
