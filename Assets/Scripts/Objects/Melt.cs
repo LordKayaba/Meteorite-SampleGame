@@ -37,7 +37,7 @@ public class Melt : MonoBehaviour
 
     void SavePoint()
     {
-        if (GameManager.Instance.savedPoint != gameObject)
+        if (GameManager.Instance.SavedPoint != gameObject)
         {
             GameManager.Instance.SavePoint(gameObject);
         }

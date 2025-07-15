@@ -23,6 +23,14 @@ public class Meteorite : MonoBehaviour
         rigi = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         trailRenderer = GetComponent<TrailRenderer>();
+        Setup();
+    }
+
+    void Setup()
+    {
+        Vector3 point = GameManager.Instance.SavedPoint.transform.position;
+        point.y += 2;
+        SetStartPoint(point);
     }
 
     void Update()
@@ -139,21 +147,15 @@ public class Meteorite : MonoBehaviour
         //UIManager.ui.SetUIPlayer(true);
     }
 
-    public void AddMass(float amount)
-    {
-        rigi.mass += amount;
-    }
+    public void AddMass(float amount) => rigi.mass += amount;
 
-    public void Trail(bool Status)
-    {
-        trailRenderer.enabled = Status;
-    }
+    public void Trail(bool Status) => trailRenderer.enabled = Status;
 
     public void SetStartPoint(Vector3 Point)
     {
-        trailRenderer.enabled = false;
+        Trail(false);
         transform.position = Point;
         Camera.main.GetComponent<CameraController>().SetPosition(Point);
-        trailRenderer.enabled = true;
+        Trail(true);
     }
 }
