@@ -12,6 +12,7 @@ public class Wood : MonoBehaviour, IAction
     protected SpriteRenderer spriteRenderer;
     protected Collider2D collider2;
     protected AudioSource audioSource;
+    protected bool isActivated = false;
 
     protected virtual void Start()
     {
@@ -23,8 +24,9 @@ public class Wood : MonoBehaviour, IAction
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (canBurn && collision.gameObject.CompareTag("Player"))
+        if (!isActivated && canBurn && collision.gameObject.CompareTag("Player"))
         {
+            isActivated = true;
             StartCoroutine(Burning());
         }
     }
@@ -44,6 +46,7 @@ public class Wood : MonoBehaviour, IAction
 
     public void Explode()
     {
+        isActivated = true;
         audioSource?.Play();
         Fall();
 

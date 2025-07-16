@@ -13275,7 +13275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &354048089
 Transform:
   m_ObjectHideFlags: 0
@@ -20615,7 +20615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6048ada1801a7f547961fe424144b7b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meteorite: {fileID: 2128955075}
+  targetToFollow: {fileID: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -30118,6 +30118,10 @@ PrefabInstance:
     - target: {fileID: 1840736531370213500, guid: 336f1b64f64b178489f04d855128dbab, type: 3}
       propertyPath: m_Name
       value: Wood (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840736531370213500, guid: 336f1b64f64b178489f04d855128dbab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1840736531370213501, guid: 336f1b64f64b178489f04d855128dbab, type: 3}
       propertyPath: m_RootOrder
@@ -79153,7 +79157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b4e12719a8fd544a2dd0da823da42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seasons: []
+  seasons:
+  - {fileID: 11400000, guid: d36c7458ab661cd4e94ab59825e1083c, type: 2}
 --- !u!1 &1994505515
 GameObject:
   m_ObjectHideFlags: 0
@@ -84771,7 +84776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!96 &2128955071
 TrailRenderer:
   serializedVersion: 2
@@ -84977,7 +84982,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2128955070}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.2, y: -4, z: 0}
+  m_LocalPosition: {x: 603, y: 188, z: 0}
   m_LocalScale: {x: 1.5, y: 1.55, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

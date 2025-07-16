@@ -13,6 +13,7 @@ public class Meteorite : MonoBehaviour
     [SerializeField] bool isCollision = false;
     public bool isMove = true, isDamage = true;
 
+    bool isDead = false;
     float time = 0;
     Rigidbody2D rigi;
     SpriteRenderer spriteRenderer;
@@ -28,7 +29,7 @@ public class Meteorite : MonoBehaviour
 
     void Setup()
     {
-        Vector3 point = GameManager.Instance.SavedPoint.transform.position;
+        Vector3 point = GameManager.Instance.SavedPoint;
         point.y += 2;
         SetStartPoint(point);
     }
@@ -100,6 +101,8 @@ public class Meteorite : MonoBehaviour
 
     public void Damage(float amount)
     {
+        if (isDead) return;
+
         health -= amount;
         if (health < 0)
         {
@@ -108,31 +111,19 @@ public class Meteorite : MonoBehaviour
         //UIManager.ui.SetUIPlayer(false);
         if (health <= 0)
         {
+            isDead = true;
             isMove = false;
             Trail(false);
             /*spriteRenderer.sprite = player.sprites.cold;
             spriteRenderer.color = player.sprites.color;*/
-            StartCoroutine(CheckFire());
+            StartCoroutine(SetSimulatedFalseAfterDelay(3));
+            GameManager.Instance.OnPlayerDied();
         }
     }
 
-    IEnumerator CheckFire()
+    IEnumerator SetSimulatedFalseAfterDelay(float time)
     {
-        yield return new WaitForSeconds(2);
-        /*if (GameData.data.level.fire > 0)
-        {
-            GameData.data.level.AddFire(-1);
-            GameManager.manager.ResetGame();
-        }
-        else
-        {
-            GameManager.manager.GameOver();
-        }*/
-    }
-
-    public void Die()
-    {
-        Damage(100);
+        yield return new WaitForSeconds(time);
         rigi.simulated = false;
     }
 
@@ -155,7 +146,7 @@ public class Meteorite : MonoBehaviour
     {
         Trail(false);
         transform.position = Point;
-        Camera.main.GetComponent<CameraController>().SetPosition(Point);
+        Camera.main.GetComponent<CameraController>().SetTargetToFollow(transform);
         Trail(true);
     }
 }

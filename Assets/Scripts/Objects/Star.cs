@@ -7,9 +7,16 @@ public class Star : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Collider2D collider2;
     AudioSource audioSource;
+    bool isActivated = false;
 
     void Start()
     {
+        if (GameManager.Instance.ShouldBeDisabled(gameObject))
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider2 = GetComponent<Collider2D>();
         audioSource = GetComponent<AudioSource>();
@@ -17,8 +24,11 @@ public class Star : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (!isActivated && collision.gameObject.CompareTag("Player"))
         {
+            isActivated = true;
+            GameManager.Instance.AddStar();
+            GameManager.Instance.AddToDisabledGameObjects(gameObject);
             collider2.enabled = false;
             audioSource.Play();
             transform.GetChild(0).gameObject.SetActive(true);

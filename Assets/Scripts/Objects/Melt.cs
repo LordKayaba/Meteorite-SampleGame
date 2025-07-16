@@ -35,11 +35,11 @@ public class Melt : MonoBehaviour
         }
     }
 
+    bool savedPoint = false;
     void SavePoint()
     {
-        if (GameManager.Instance.SavedPoint != gameObject)
-        {
-            GameManager.Instance.SavePoint(gameObject);
-        }
+        if (savedPoint) return;
+
+        GameManager.Instance.SavePoint(gameObject.transform.position);
     }
 }

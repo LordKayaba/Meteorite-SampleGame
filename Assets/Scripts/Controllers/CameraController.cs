@@ -1,17 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform meteorite;
+    public Transform targetToFollow;
 
-    bool SetPos = false;
+    bool follow = false;
     void FixedUpdate()
     {
-        if(!SetPos && Vector2.Distance(transform.position, meteorite.position) > 0.5f)
+        if (follow && targetToFollow && Vector2.Distance(transform.position, targetToFollow.position) > 0.5f)
         {
-            Vector3 vector = Vector2.Lerp(transform.position, meteorite.position, Time.deltaTime * 3);
+            Vector3 vector = Vector3.Lerp(transform.position, targetToFollow.position, Time.deltaTime * 3);
             vector.z = -10;
             transform.position = vector;
         }
@@ -19,9 +17,15 @@ public class CameraController : MonoBehaviour
 
     public void SetPosition(Vector3 Point)
     {
-        SetPos = true;
+        follow = false;
         Point.z = -10;
         transform.position = Point;
-        SetPos = false;
+        follow = true;
+    }
+
+    public void SetTargetToFollow(Transform target)
+    {
+        targetToFollow = target;
+        SetPosition(target.transform.position);
     }
 }

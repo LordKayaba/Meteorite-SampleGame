@@ -9,6 +9,8 @@ public class TNT : MonoBehaviour
     AudioSource audioSource;
     SpriteRenderer spriteRenderer;
     Collider2D collider2d;
+    bool isActivated = false;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -24,8 +26,9 @@ public class TNT : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (!isActivated && collision.gameObject.CompareTag("Player"))
         {
+            isActivated = true;
             audioSource.Play();
             transform.GetChild(0).gameObject.SetActive(true);
             if(actions.Count > 0)
