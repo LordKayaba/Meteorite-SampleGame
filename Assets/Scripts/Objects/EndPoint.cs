@@ -2,11 +2,14 @@
 
 public class EndPoint : MonoBehaviour
 {
+    bool isActivated = false;
+
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (!isActivated && collision.gameObject.CompareTag("Player"))
         {
-            //GameManager.manager.Complete();
+            isActivated = true;
+            GameManager.Instance.OnLevelComplete();
         }
     }
 }

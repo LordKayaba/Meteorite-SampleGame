@@ -105,6 +105,11 @@ public class GameManager : MonoBehaviour
         LifeCount = data.LifeCount;
     }
 
+    public void OnLevelComplete()
+    {
+        State = GameState.LevelCompleted;
+    }
+
     public void OnPlayerDied()
     {
         if (LifeCount <= 0) return;
