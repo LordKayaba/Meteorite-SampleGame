@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -51,7 +50,8 @@ public class GameManager : MonoBehaviour
         {
             case GameState.InMenu:
                 break;
-            case GameState.Playing: LoadLevel(CurrentSeasonIndex, CurrentLevelIndex);
+            case GameState.Playing:
+                LoadLevel(CurrentSeasonIndex, CurrentLevelIndex);
                 break;
             case GameState.RestartingLevel:
                 break;
